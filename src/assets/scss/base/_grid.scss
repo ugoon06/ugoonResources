@@ -1,0 +1,103 @@
+$grid-gutter-rem : convert-unit($base-grid-gutter, 'rem');
+
+.columns {
+    display: flex;
+    flex-wrap: wrap;
+
+    &:not(.are-gapless) {
+        margin: {
+            right: -$grid-gutter-rem;
+            left: -$grid-gutter-rem;
+        }
+    }
+
+    &.are-reversed {
+        flex-direction: row-reverse;
+    }
+
+    &.are-gapless {
+        .column {
+            // stylelint-disable length-zero-no-unit
+            @include padding-map(0px, 'x');
+            // stylelint-enable length-zero-no-unit
+        }
+    }
+
+    &.are-at-start {
+        justify-content: flex-start;
+    }
+
+    &.are-at-end {
+        justify-content: flex-end;
+    }
+
+    &.are-at-center {
+        justify-content: center;
+    }
+}
+
+.column {
+    width: 100%;
+    min-height: 1px;
+    padding: $grid-gutter-rem;
+
+    &.no-y-padding {
+        padding-top: 0;
+        padding-bottom : 0;
+    }
+
+    &:not([class*='is-']) {
+        flex: {
+            basis: 0;
+            grow: 1;
+        }
+    }
+}
+
+@each $namespace,
+$size in get('breakpoint') {
+    @if type-of($size)=='number' {
+        @include media-min($namespace) {
+            @for $i from 1 through $base-grid-columns {
+                @include grid-generator($namespace, $i);
+            }
+
+            .column {
+                &.is-#{$namespace} {
+                    flex: {
+                        basis: 0;
+                        grow: 1;
+                    }
+
+                    &-smart {
+                        width: auto;
+
+                        flex: {
+                            grow: 0;
+                            shrink: 0;
+                            basis: auto;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    @else {
+        .column {
+            &.is-smart {
+                width: auto;
+
+                flex: {
+                    grow: 0;
+                    shrink: 0;
+                    basis: auto;
+                }
+            }
+        }
+
+        @for $i from 1 through $base-grid-columns {
+            @include grid-generator($namespace, $i);
+        }
+    }
+}

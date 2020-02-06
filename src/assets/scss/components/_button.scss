@@ -1,0 +1,164 @@
+.btn-wrap {
+    @include clearfix();
+    text-align: center;
+    padding: convert-unit(get('spacing.button-wrap.basic.y')) convert-unit(get('spacing.button-wrap.basic.x'));
+
+    &.with-border {
+        margin-top: convert-unit(get('spacing.button-wrap.basic.y') - 5);
+        border-top: 1px solid get('theme_1.border.color')
+    }
+
+    .btn {
+        margin:0 convert-unit(3px);
+    }
+}
+
+$btn-animate-duration : .2s;
+
+.btn {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    white-space: nowrap;
+    text-decoration: none;
+    line-height: 1.2;
+    font-size: .8em;
+    color: #fff;
+    vertical-align: middle;
+    background-image: none;
+    border-width: 0;
+    border-style: solid;
+    border-radius: 0;
+    box-shadow: inset 0 0 0 0;
+    -webkit-appearance: none;
+    border-width: 1px;
+    font-size: $base-font-size;
+    @include padding-map('m', 'y', 'button');
+    @include padding-map('m', 'x', 'button');
+
+    i {
+        @include position(relative, null null null null);
+        z-index: 2;
+        vertical-align: middle;
+        margin-right: convert-unit(7px);
+    }
+
+    span {
+        @include position(relative, null null null null);
+        z-index: 2;
+        display: block;
+        letter-spacing: convert-unit(-.5px);
+    }
+
+    &::after {
+        content: '';
+        @include position(absolute, 0 null null 0);
+        z-index: 1;
+        @include size(100%);
+        opacity: 0;
+        background: rgba(0, 0, 0, .07);
+        transition: all $btn-animate-duration;
+    }
+
+    &:hover {
+        &::after {
+            opacity: 1;
+        }
+    }
+
+    &.xs {
+        font-size: convert-unit(get('font.size.xs'));
+        @include padding-map('xs', 'y', 'button');
+        @include padding-map('xs', 'x', 'button');
+    }
+
+    &.s {
+        font-size:convert-unit( get('font.size.s'));
+        @include padding-map('s', 'y', 'button');
+        @include padding-map('s', 'x', 'button');
+    }
+
+    &.l {
+        font-size: convert-unit(get('font.size.l'));
+        @include padding-map('l', 'y', 'button');
+        @include padding-map('l', 'x', 'button');
+    }
+
+    &.xl {
+        font-size: convert-unit(get('font.size.xl'));
+        @include padding-map('xl', 'y', 'button');
+        @include padding-map('xl', 'x', 'button');
+    }
+
+    &.round {
+        border-radius: convert-unit(4px);
+    }
+
+    // ani left
+    &.ani-left {
+        &::after {
+            display: block;
+            width: 0;
+            height: 100%;
+            opacity: 1;
+        }
+
+        &:hover::after {
+            width: 100%;
+        }
+    }
+
+    // ani top
+    &.ani-top {
+        &::after {
+            display: block;
+            width: 100%;
+            height: 0;
+            opacity: 1;
+        }
+
+        &:hover::after {
+            height: 100%;
+        }
+    }
+
+    $button-color : get('theme_1.colors');
+
+    @each $name,
+    $color in $button-color {
+        $button-text-color: #fff;
+        $border-color: $color;
+
+        @if ($name=="disabled" or $name=="cancel") {
+            $button-text-color: get('theme_1.colors.basic');
+        }
+
+        @else if ($name=="kakao") {
+            $button-text-color: get('theme_1.colors.kakao-brown');
+        }
+
+        &.#{$name} {
+            color: $button-text-color;
+            background-color: $color;
+            border-color: $border-color;
+
+            &:after {
+                background: darken($color, 5%);
+            }
+        }
+
+        &.#{$name}.stroke {
+            background: #fff;
+            color: $color;
+
+            &:after {
+                background: #fff;
+            }
+        }
+
+        &.#{$name}.shadow {
+            box-shadow : 0 4px 20px rgba($color, .5);
+        }
+    }
+}

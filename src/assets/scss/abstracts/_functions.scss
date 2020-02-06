@@ -1,0 +1,163 @@
+// 단위 제거
+//  $number : 단위 제거할 px값
+@function strip-unit($number) {
+    @return $number / ($number * 0 + 1);
+}
+
+// 구분 문자로 나누기
+// $string : string 텍스트 
+// $delimiter : 구분 문자 (기본 값 : .)
+@function str-explode ($string, $delimiter: '.') {
+    $result: ();
+    $running: true;
+
+    @if str-length($delimiter)==0 {
+        @for $i from 1 through str-length($string) {
+            $result: append($result, str-slice($string, $i, $i));
+        }
+
+        @return $result;
+    }
+
+    @while $running {
+        $index: str-index($string, $delimiter);
+
+        @if $index !=null {
+            $item: str-slice($string, 1, ($index - 1));
+            $result: append($result, $item);
+            $string: str-slice($string, ($index + str-length($delimiter)));
+        }
+
+        @else {
+            $running: false;
+        }
+    }
+
+    @return append($result, $string);
+}
+
+// 첫 글자를 대문자로 변경
+// $string : string 문자
+@function str-capitalize ($string) {
+    @return to-upper-case(str-slice($string, 1, 1))+str-slice($string, 2);
+}
+
+// 해당 문자열 지정 문자열로 대체
+//   $string : 원문
+//   $search : 변경될 문자
+//   $replace : 변경할 문자
+@function str-replace ($string, $search, $replace: '') {
+    $index: str-index($string, $search);
+
+    @if $index {
+        @return str-slice($string, 1, $index - 1)+$replace+str-replace(str-slice($string, $index + str-length($search)),
+            $search, $replace);
+    }
+
+    @return $string;
+}
+
+
+@function yiq-test ($color, $threshold) {
+    $r: red($color);
+    $g: green($color);
+    $b: blue($color);
+
+    $yiq: (($r * 299) + ($g * 587) + ($b * 114)) / 1000;
+
+    @return if($yiq >=$threshold, true, false);
+}
+
+// 색상변경 하기 (진하게, 덜 진하게, 기본, 덜 밝게, 환하게) 자동 생성
+// $base : 지정한 색상 값
+@function yiq ($base, $dark: $dfr-yiq-color-dark, $light: $dfr-yiq-color-light, $threshold: $dfr-yiq-threshold) {
+    @return if(yiq-test($base, $threshold), $dark, $light);
+}
+
+// 그리드 넓이 계산
+// $num : 사용할 그리드 갯수
+// $column : 기준 그리드 갯수 (기본값 : 12)
+@function grid-calc ($number, $columns: $base-grid-columns) {
+    @return unquote((100 / $columns * $number) + '%');
+}
+
+// 단위 변환
+// $number : 변환시킬 px값
+// $unit : 변환 em, rem 단위
+// $base : 기본 px값
+@function convert-unit($number, $unit : 'rem', $base : $base-font-size) {
+    @return strip-unit($number) / strip-unit($base)+unquote($unit);
+}
+
+// map 키 값 가져오기
+// $key : 키 값
+// $map : config 맵
+
+// 사용 법 : get('border.width');
+@function get ($key, $map: $ugoon-config) {
+    $keys: str-explode($key, '.');
+    @return deep-map-get($map, $keys...);
+}
+
+// 하위 map 키 값 존재 여부 확인
+// $map : map
+// $keys : 키 이름(들)
+@function deep-map-check ($map, $keys...) {
+    @each $key in $keys {
+        @if not map-has-key($map, $key) {
+            @return false;
+        }
+
+        $map: map-get($map, $key);
+    }
+
+    @return true;
+}
+
+// 하위 map 키 값 구하기
+// $map : map
+// $keys : 키 이름(들)
+@function deep-map-get ($map, $keys...) {
+    @each $key in $keys {
+        $map: map-get($map, $key);
+    }
+
+    @return $map;
+}
+
+// map 합치기
+@function deep-map-merge ($map, $maps...) {
+    $last: nth($maps, -1);
+    $deep: $last==true;
+    $max: if($deep, length($maps) - 1, length($maps));
+
+    // Loop through all maps in $maps...
+    @for $i from 1 through $max {
+        // Store current map
+        $current: nth($maps, $i);
+
+        // If not in deep mode, simply merge current map with map
+        @if not $deep {
+            $map: map-merge($map, $current);
+        }
+
+        @else {
+
+            // If in deep mode, loop through all tuples in current map
+            @each $key,
+            $value in $current {
+
+                // If value is a nested map and same key from map is a nested map as well
+                @if type-of($value)=='map'and type-of(map-get($map, $key))=='map' {
+                    // Recursive extend
+                    $value: deep-map-merge(map-get($map, $key), $value, true);
+                }
+
+                // Merge current tuple with map
+                $map: map-merge($map, ($key: $value));
+            }
+        }
+    }
+
+    @return $map;
+}

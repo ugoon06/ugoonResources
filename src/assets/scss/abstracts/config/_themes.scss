@@ -1,0 +1,61 @@
+$ugoon-config: deep-map-merge(
+    (
+        'theme_1' : (
+            'body' : (
+                'background-color' : #fff
+            ),
+            'colors' : (
+                'basic' : #363636,
+                'confirm' : #3a4263,
+                'cancel' : #ededed,
+                'accent' : #ee2e22,
+                'brown' : #8d6c6c,
+                'warning' : #ffa000,
+                'gray' : #747474,
+                'dark' : #343a40,
+                'selection' : #f36f38,
+                'primary' : #2b6ef3,
+                'secondary' : #41b4e1,
+                'success' : #88c559,
+                'info' : #17a2b8,
+                'disabled' : #eee,
+                'facebook' : #4a6ea9,
+                'twitter' : #55acee,
+                'google' : #dd493d,
+                'kakao' : #ffc539,
+                'kakao-brown' :#392324,
+                'email': #607d8b,
+                'instagram': #d6249f,
+                'pinterest': #c8232c,
+                'naver': #3eaf0e,
+                'youtube': #cd201f,
+                'tumblr': #34526f,
+                'behance': #000,
+                'linkedin': #4875B4,
+                'line' : #3eaf0e,
+                'paypal' : #092F87,
+                'contrast-lower' : #f2f2f2,
+                'contrast-low' : #d8d8d9,
+                'contrast-medium' : #98989a,
+                'contrast-high' : #313135,
+                'contrast-higher' : #1c1c21,
+            ),
+            'border' : (
+                'color' : #cfcfcf
+            ),
+            'table' : (
+                'th-color' : #000,
+                'td-color' : #000,
+                'th-bg-color' : #f6f6f6,
+                'td-bg-color' : #fff,
+                'th-border-color' : #f4f4f4, 
+                'td-border-color' : #f4f4f4,
+                'tr-hover-color' : rgba(217, 217, 217, 0.09),
+                'zebar-bg-color' : rgba(217, 217, 217, 0.09),
+                'em-bg-color' : rgba(64,134,255,.06)
+            )
+        )
+    ),
+    $ugoon-config,
+    true
+)

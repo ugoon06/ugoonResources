@@ -1,0 +1,37 @@
+// body
+body {
+    @include position(absolute, 0 0 0 0);
+    color: get('font.color');
+    font-family: get('font.family');
+    font-size: $base-font-size;
+    font-weight: get('font.weight');
+    letter-spacing: convert-unit(get('font.letter-spacing'));
+    background-color: get('theme_1.body.background-color');
+}
+
+// table
+table {
+    th {
+        background-color: get('theme_1.table.th-bg-color');
+    }
+
+    td {
+        background-color: get('theme_1.table.td-bg-color');
+    }
+}
+
+// storybook guide title
+h2.guide-title {
+    padding: convert-unit(15px);
+    margin: 0 auto;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+h3.guide-title {
+    font-size: 18px;
+    padding: convert-unit(15px);
+}
+
+h3.guide-title + .btn-wrap {
+    border-bottom: 1px solid #e5e5e5;
+}

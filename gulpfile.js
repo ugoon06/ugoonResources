@@ -97,8 +97,7 @@ gulp.task('watch', function () {
   gulp.watch(path.join(paths.scss_src, '/**/*'), ['sass', reload]);
   gulp.watch(path.join(paths.js_src, '/**/*'), ['concat:js', reload]);
   gulp.watch(path.join(paths.include_src, '/**/*'), ['fileinclude', reload]);
-  gulp.watch(path.join(paths.html_src, '/**/*'), ['fileinclude', reload]);
-  gulp.watch(path.join(paths.html_src, 'index.html'), ['fileinclude', reload]);
+  gulp.watch([path.join(paths.html_src, '/**/*'), path.join(paths.html_src, 'index.html')], ['fileinclude', reload]);
   gulp.watch(path.join(paths.sprite_png_src, '/**/*'), ['auto-sprite', 'images', reload]);
   gulp.watch(path.join(paths.img_src, '/**/*'), ['images', reload]);
 })

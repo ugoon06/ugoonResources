@@ -1,0 +1,52 @@
+$ugoon-config: deep-map-merge(
+    (
+        'form' : (
+            'input' : (
+                'size' : (
+                    'xs' : (
+                        'x' : $base-x-spacing / 1.75,
+                        'y' : $base-y-spacing / 1.75
+                    ),
+                    's' : (
+                        'x' : $base-x-spacing / 1.5,
+                        'y' : $base-y-spacing / 1.5
+                    ),
+                    'm' : (
+                        'x' : $base-x-spacing,
+                        'y' : $base-y-spacing
+                    ),
+                    'l' : (
+                        'x' : $base-x-spacing * 1.25,
+                        'y' : $base-y-spacing * 1.25
+                    ),
+                    'xl' : (
+                        'x' : $base-x-spacing * 1.5,
+                        'y' : $base-y-spacing * 1.5
+                    )
+                )
+            ),
+            'radio-switch-basic' : (
+                'width' : 186px,
+                'height' : 42px,
+                'padding' : 3px,
+                'radius' : 50rem,
+                'animation-duration' : 0.3s
+            ),
+            'radio-switch-v2' : (
+                'width' : 52px,
+                'height' : 30px,
+                'padding' : 4px,
+                'radius' : 50rem,
+                'animation-duration' : 0.3s
+            ),
+            'switch' : (
+                'width' : 64px,
+                'height' : 32px,
+                'padding' : 3px,
+                'animation-duration' : 0.2s
+            )
+        )
+    ),
+    $ugoon-config,
+    true
+);

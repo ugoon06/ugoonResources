@@ -1,0 +1,15 @@
+
+$base-color : #363636 !default; // base color
+
+$base-font-size : 15px !default; // font-size
+$base-font-size-small : ($base-font-size - 2) !default; // small font-size
+$base-letter-spacing : -.2px !default; // letter-spacing
+
+$base-grid-columns : 12 !default;
+$base-grid-gutter : 15px !default;
+
+$base-spacing: 24px !default;
+$base-x-spacing: $base-spacing !default;
+$base-y-spacing: $base-spacing / 2 !default;
+
+$base-radius : 4px !default;

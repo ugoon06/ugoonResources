@@ -1,0 +1,37 @@
+#ionic_list {
+    overflow: hidden;
+
+    li {
+        float: left;
+        font-size: convert-unit(26px);
+        width: 118px;
+        cursor: pointer;
+        text-align: center;
+        border-bottom: 1px solid #e5e5e5;
+        border-right: 1px solid #e5e5e5;
+        padding: convert-unit(30px) 0;
+        max-height: 120px;
+
+        &::before {
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        &:hover {
+            background: #f7f7f7;
+        }
+
+        span {
+            display: block;
+            font-size: convert-unit(12px);
+            text-align: center;
+            word-break: break-all;
+            padding: 0 convert-unit(5px);
+        }
+
+        &:hover::before,
+        &:hover span {
+            color: #ee2e22;
+        }
+    }
+}

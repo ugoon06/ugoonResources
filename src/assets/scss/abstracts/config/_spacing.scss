@@ -1,0 +1,36 @@
+$ugoon-config: deep-map-merge(
+    (  
+        'spacing': (
+            'default' : (
+                'xs' : (
+                    'x' : $base-x-spacing / 2.5,
+                    'y' : $base-y-spacing / 2.5
+                ),
+                's' : (
+                    'x' : $base-x-spacing / 1.5,
+                    'y' : $base-y-spacing / 1.5
+                ),
+                'm' : (
+                    'x' : $base-x-spacing,
+                    'y' : $base-y-spacing
+                ),
+                'l' : (
+                    'x' : $base-x-spacing * 1.5,
+                    'y' : $base-y-spacing * 1.5
+                ),
+                'xl' : (
+                    'x' : $base-x-spacing * 2.5,
+                    'y' : $base-y-spacing * 2.5
+                )
+            ),
+            'section' : (
+                'wrap' : (
+                    'y-top' : 80px,
+                    'y-bottom' : 40px
+                )
+            )
+        )
+    ),
+    $ugoon-config,
+    true
+);

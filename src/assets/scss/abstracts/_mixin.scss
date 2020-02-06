@@ -1,0 +1,178 @@
+// media query 생성
+// $media : 화면 사이즈 약칭
+//     mobile : 모바일 576px
+//     tablet : 타블릿 768px
+//     mobile-tablet : 모바일 ~ 타블릿 까지
+//     mobile-table-small : 모바일 ~ 작은 모니터 까지
+//     tablet-small : 타블릿 사이즈 768px
+//     small-desktop : 작은 모니터 사이즈
+//     medium-desktop : 중간 모니터 사이즈
+//     larget-desktop : 큰 모니터 사이즈
+//     desktop : 일반 데스크탑 사이즈
+@mixin respond-to($media) {
+    @if $media==mobile {
+        @media only screen and (max-width: 576px) {
+            @content;
+        }
+    }
+
+    @else if $media==tablet {
+        @media only screen and (min-width: 577px) and (max-width: 768px) {
+            @content;
+        }
+    }
+
+    @else if $media==mobile-tablet {
+        @media only screen and (max-width: 768px) {
+            @content;
+        }
+    }
+
+    @else if $media==mobile-tablet-small {
+        @media only screen and (max-width: 1023px) {
+            @content;
+        }
+    }
+
+    @else if $media==tablet-small {
+        @media only screen and (min-width: 577px) and (max-width: 1023px) {
+            @content;
+        }
+    }
+
+    @else if $media==small-desktop {
+        @media only screen and (min-width: 769px) and (max-width: 1023px) {
+            @content;
+        }
+    }
+
+    @else if $media==medium-desktop {
+        @media only screen and (min-width: 1024px) and (max-width: 1149px) {
+            @content;
+        }
+    }
+
+    @else if $media==large-desktop {
+        @media only screen and (min-width: 1150px) {
+            @content;
+        }
+    }
+
+    @else if $media==desktop {
+        @media only screen and (min-width: 1024px) {
+            @content;
+        }
+    }
+}
+
+// min width
+// $namespace : xs, s, m, l, xl
+// @include media-min('xs');
+@mixin media-min ($namespace) {
+    @media only screen and (min-width: convert-unit(get('breakpoint.#{$namespace}'), 'em')) {
+        @content;
+    }
+}
+
+// max width
+// $namespace : xs, s, m, l, xl
+// @include media-max('xs');
+@mixin media-max ($namespace) {
+    @media only screen and (max-width: convert-unit(get('breakpoints.#{$namespace}') - 1, 'em')) {
+        @content;
+    }
+}
+
+
+@mixin spacing ($namespace, $sides, $type, $property) {
+    $orientations: ('x': ('right', 'left'), 'y': ('top', 'bottom'));
+    $map: get('spacing.#{$type}');
+    $typeCheck: type-of($namespace)=='string'and $namespace !='auto'and $namespace !='unset';
+    $size: $namespace; // instead of null, maybe it's a zero which should be unitless
+
+    @if type-of($namespace)=='number'and not unitless($namespace) {
+        $size: convert-unit($namespace, 'rem');
+    }
+
+    @else if $namespace=='auto'or $namespace=='unset' {
+        $size: unquote($namespace);
+    }
+
+    @each $side in $sides {
+        @if $side=='x'or $side=='y' {
+            $axis: map-get($orientations, $side);
+
+            @if $typeCheck {
+                $size: convert-unit(get('#{$namespace}.#{$side}', $map), 'rem');
+            }
+
+            @for $i from 1 through length($axis) {
+                #{$property}-#{nth($axis, $i)}: $size;
+            }
+        }
+
+        @else if index(map-get($orientations, 'x'), $side) !=null {
+            @if $typeCheck {
+                $size: convert-unit(get('#{$namespace}.x', $map), 'rem');
+            }
+
+            #{$property}-#{$side}: $size;
+        }
+
+        @else if index(map-get($orientations, 'y'), $side) !=null {
+            @if $typeCheck {
+                $size: convert-unit(get('#{$namespace}.y', $map), 'rem');
+            }
+
+            #{$property}-#{$side}: $size;
+        }
+
+        @else {
+            @if $typeCheck {
+                $sizeY: convert-unit(get('#{$namespace}.y', $map), 'rem');
+                $sizeX: convert-unit(get('#{$namespace}.x', $map), 'rem');
+
+                #{$property}: if($sizeY==$sizeX, $sizeY, $sizeY $sizeX);
+            }
+
+            @else {
+                #{$property}: $size;
+            }
+        }
+    }
+}
+
+// 맵형식으로 정의된 여백 값 padding으로 적용
+@mixin padding-map ($namespace, $properties: (''), $type: 'default') {
+    @include spacing($namespace, $properties, $type, 'padding');
+}
+
+// 맵형식으로 정의된 여백 값 margin으로 적용
+@mixin margin-map ($namespace, $properties: (''), $type: 'default') {
+    @include spacing($namespace, $properties, $type, 'margin');
+}
+
+// grid 생성
+@mixin grid-generator ($namespace, $number) {
+    $dfr-grid-formula: grid-calc($number);
+
+    $suffix: if($namespace=='xs',
+        $number,
+        #{$namespace}-#{$number});
+
+    .column {
+        &.is-#{$suffix} {
+            flex: {
+                grow: 0;
+                shrink: 0;
+                basis: $dfr-grid-formula;
+            }
+        }
+    }
+
+    .has-offset {
+        &-#{$suffix} {
+            margin-left: $dfr-grid-formula;
+        }
+    }
+}
