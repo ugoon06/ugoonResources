@@ -12,7 +12,7 @@ body {
     
     @include respond-to(mobile) {
         font-size: 16px;
-		background: radial-gradient(circle at center, #111 10%, #323232 100%);
+		//background: radial-gradient(circle at center, #111 10%, #323232 100%);
     }
 
     .loading {
