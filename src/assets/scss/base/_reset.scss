@@ -298,15 +298,15 @@ img {
 .loading, .loading-img {
     z-index: 11000;
 }
-  
-  .loading {
+
+.loading {
     @include position(fixed, 0 null null 0);
     width: 100%;
     height: 100%;
     background: rgba(#000, .7);
-  }
-  
-  .loading-img {
+}
+
+.loading-img {
     @include position(fixed, 50% null null 50%);
     width: 60px;
     height: 60px;
@@ -317,14 +317,14 @@ img {
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
     border-radius: 50%;
-  
+
     img {
-      display: block;
-      width: 32px;
-      height: 32px;
-      margin: 10px auto 0;
+        display: block;
+        width: 32px;
+        height: 32px;
+        margin: 10px auto 0;
     }
-  }
+}
 
 // html scroll fixed
 html.off {
