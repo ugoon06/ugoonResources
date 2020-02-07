@@ -640,6 +640,7 @@ body {
 
                         @include respond-to(mobile) {
                             width: 100%;
+                            padding-top: 1em;
                         }
     
                         &:nth-child(1),
