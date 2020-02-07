@@ -641,6 +641,11 @@ body {
                         @include respond-to(mobile) {
                             width: 100%;
                         }
+    
+                        &:nth-child(1),
+                        &:nth-child(2) {
+                            border-top: none;
+                        }
 
                         &:nth-child(2) {
                             @include respond-to(mobile) {
@@ -652,11 +657,6 @@ body {
                             @include respond-to(mobile) {
                                 border-left: none;
                             }
-                        }
-    
-                        &:nth-child(1),
-                        &:nth-child(2) {
-                            border-top: none;
                         }
     
                         &:nth-child(2n) {
