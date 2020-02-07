@@ -45,7 +45,7 @@ const paths = {
   js_dist: 'dist/assets/js/',
   html_src: 'src/markup/',
   include_src: 'src/include',
-  gulpconfig: 'src/gulpConfig'
+  gulpconfig: 'gulpConfig'
 };
 
 // gulp task 환경 설정
