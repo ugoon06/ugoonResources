@@ -801,6 +801,8 @@ body {
                     &.on a{
                         pointer-events: none;
                         cursor: not-allowed;
+                        color: #fff;
+                        background: #444;
                     }
 
                     @include respond-to(mobile) {
