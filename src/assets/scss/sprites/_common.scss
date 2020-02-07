@@ -1,0 +1,33 @@
+$common-origin: (
+  total-width: 516px,
+  total-height: 256px,
+  imageSrc: '../images/sp_common.png'
+);
+
+$common-vars: (
+	'blood-sample-black@2x': (
+		offset-x: 0px,
+		offset-y: 0px,
+		width: 256px,
+		height: 256px
+	),
+	'blood-sample@2x': (
+		offset-x: -260px,
+		offset-y: 0px,
+		width: 256px,
+		height: 256px
+	),
+);
+
+@mixin sp-common($image) {
+	$image-origin: $common-origin;
+	$image-var: map-get($common-vars, $image);
+	$image-path: map-get($image-origin, 'imageSrc');
+
+	width: map-get($image-var, 'width')/2;
+	height: map-get($image-var, 'height')/2;
+	background-image: url($image-path);
+	background-size: map-get($image-origin, 'total-width')/2 map-get($image-origin, 'total-height')/2;
+	background-position: map-get($image-var, 'offset-x')/2 map-get($image-var, 'offset-y')/2;
+	background-repeat: no-repeat;
+}

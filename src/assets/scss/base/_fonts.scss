@@ -1,10 +1,15 @@
-@import url('https://fonts.googleapis.com/css?family=Noto+Sans+KR:100,300,400,700&display=swap');
+@import url("https://fonts.googleapis.com/css?family=Noto+Sans+KR:100,300,400,700&display=swap");
+.noto-sans {
+	font-family: 'Noto Sans KR', sans-serif;
+}
 
-.noto-sans{
-    font-family: 'Noto Sans KR', sans-serif;
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap');
+.roboto {
+	font-family: 'Roboto', sans-serif;
 }
 
 @import url('https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css');
+
 
 /*@font-face {
     font-family: 'Noto Sans KR';

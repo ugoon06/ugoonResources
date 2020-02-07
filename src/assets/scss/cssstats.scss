@@ -1,0 +1,418 @@
+@import "./base/variables",
+        "./bourbon",
+        "./sprites/sprite_maps",
+        "./abstracts/functions", 
+        "./abstracts/mixin",
+        "./abstracts/config";
+
+@import "./base/fonts",
+        "./base/normalize",
+        "./base/reset",
+        "./base/grid";
+
+body {
+    color: #000;
+    line-height: 1.8;
+    font-size: 18px;
+    font-weight: 100;
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    min-height: 100vh;
+    min-width: 320px;
+    max-width: 760px;
+    margin: 0 auto;
+}
+    
+.half {
+    float: left;
+    width: 50%;
+    }
+    
+    .one-third {
+    float: left;
+    width: 33.33333333%;
+    padding-bottom: 20px;
+    
+    &:nth-child(4n) ~ .one-fourth {
+        margin-top: 1.5rem;
+    }
+    
+    &:nth-child(4n + 1) {
+        clear: both;
+    }
+    }
+    
+    .one-fourth {
+    float: left;
+    width: 25%;
+    
+    &:nth-child(5n) ~ .one-fourth {
+        margin-top: 1.5rem;
+    }
+    
+    &:nth-child(5n + 1) {
+        clear: both;
+    }
+    }
+    
+    .one-fifth {
+    float: left;
+    width: 20%;
+    
+    &:nth-child(6n) ~ .one-fifth {
+        margin-top: 1.5rem;
+    }
+    
+    &:nth-child(6n + 1) {
+        clear: both;
+    }
+}
+
+.stats-box {
+    border-bottom: 1px solid #ccc;
+    padding: 50px 20px;
+    
+    a {
+        color: #000;
+        text-decoration: underline;
+    
+        &:link, &:visited, &:hover {
+        color: #000;
+        text-decoration: underline;
+        }
+    }
+    
+    &#overview {
+        background: #222;
+        color: #fff;
+    
+        a {
+        color: #fff;
+        text-decoration: underline;
+    
+        &:link, &:visited, &:hover {
+            color: #fff;
+            text-decoration: underline;
+        }
+        }
+    }
+
+    &::after {
+        content: '';
+        display: table;
+        clear: both;
+    }
+    
+    dl {
+        dt {
+        font-size: .8rem;
+        font-weight: 300;
+        }
+    
+        dd {
+        font-size: 2rem;
+        font-weight: 700;
+        line-height: 1;
+        }
+    }
+    
+    h2 {
+        clear: both;
+        font-size: 1.2rem;
+        padding-bottom: 1.5rem;
+    
+        + p {
+        margin-top: -1rem;
+        padding-bottom: 1rem;
+        }
+    }
+    
+    h3 {
+        clear: both;
+        font-size: 1rem;
+        font-weight: 600;
+        padding-bottom: 1.2rem;
+    }
+}
+
+.color-list {
+    margin-top: -15px;
+    margin-left: -10px;
+    
+    &:after {
+        content: '';
+        display: table;
+        clear: both;
+    }
+    
+    li {
+        float: left;
+        width: 20%;
+        padding-top: 15px;
+        padding-left: 10px;
+    
+        .color-preview-box {
+        width: 100%;
+        font-size: 2rem;
+        font-weight: 700;
+    
+        + .color-code {
+            display: block;
+            text-align: left;
+            font-size: .9rem;
+        }
+        }
+    }
+}
+
+.bgcolor-list {
+    margin-top: -15px;
+    margin-left: -10px;
+    
+    &:after {
+        content: '';
+        display: table;
+        clear: both;
+    }
+    
+    li {
+        float: left;
+        width: 20%;
+        padding-top: 15px;
+        padding-left: 10px;
+    
+        &:nth-child(5n + 1) {
+            clear: both;
+        }
+        
+        .bgcolor-preview-box {
+            width: 100%;
+            height: 50px;
+        
+            + .bgcolor-code {
+                display: block;
+                text-align: left;
+                font-size: .9rem;
+            }
+        }
+    }
+}
+
+#similar-bgcolor-list table, #total-bgcolor-list table {
+    width: 100%;
+    table-layout: fixed;
+}
+
+#similar-bgcolor-list table td, #total-bgcolor-list table td {
+    height: 60px;
+}
+
+#fontsize-example-box li {
+    border-top: 1px solid #eee;
+    padding: 5px 0;
+    
+    &:first-child {
+        border-top: none;
+    }
+    
+    span {
+        display: block;
+        text-align: left;
+    
+        &:first-child {
+        font-size: .8rem;
+        }
+    }
+}
+
+#zindex-box ul li {
+    display: inline-block;
+    padding-left: 15px;
+    
+    &:first-child {
+        padding-left: 0;
+    }
+}
+
+.graph-wrap {
+    position: relative;
+    width: 735px;
+    height: 400px;
+    border-bottom: 1px solid rgba(192, 192, 192, 1);
+    
+    .graph-y {
+        position: relative;
+        height: 100%;
+        font-size: .8rem;
+    
+        div {
+        position: absolute;
+        width: 100%;
+        z-index: 1;
+        background: linear-gradient(180deg, rgba(0, 0, 0, 0) calc(50% - 1px), rgba(192, 192, 192, 1) calc(50%), rgba(0, 0, 0, 0) calc(50% + 1px));
+    
+        span {
+            display: inline-block;
+            padding-right: 5px;
+            background: #fff;
+            text-align: left;
+            margin-left: -20px;
+        }
+    
+        &:nth-child(1) {
+            top: -12px;
+        }
+    
+        &:nth-child(2) {
+            top: calc(25% - 12px);
+        }
+    
+        &:nth-child(3) {
+            top: calc(50% - 12px);
+        }
+    
+        &:nth-child(4) {
+            top: calc(75% - 12px);
+        }
+        }
+    }
+    
+    .graph-body {
+        position: absolute;
+        top: 0;
+        left: 2%;
+        width: 100%;
+        height: 100%;
+        z-index: 10;
+    
+        span {
+        position: absolute;
+        bottom: 0;
+        background: #222;
+        }
+    }
+}
+
+#layout-structure-graph.graph-wrap .graph-body span.tit, 
+#padding-graph.graph-wrap .graph-body span.tit, 
+#margin-graph.graph-wrap .graph-body span.tit {
+    display: block;
+    width: 100%;
+    background: none;
+    bottom: -30px;
+    font-weight: 400;
+    font-size: .8rem;
+}
+
+#layout-structure-graph.graph-wrap .graph-body > div {
+    position: relative;
+    float: left;
+    width: 12.5%;
+    height: 100%;
+    text-align: center;
+    
+    > .total-declarations-bar {
+        position: absolute;
+        bottom: 0;
+        left: 15%;
+        width: 30%;
+        background: #222;
+    }
+}
+
+#padding-graph.graph-wrap .graph-body > div > .total-declarations-bar, 
+#margin-graph.graph-wrap .graph-body > div > .total-declarations-bar {
+    position: absolute;
+    bottom: 0;
+    left: 15%;
+    width: 30%;
+    background: #222;
+}
+
+#layout-structure-graph.graph-wrap .graph-body > div > .unique-declarations-bar, 
+#padding-graph.graph-wrap .graph-body > div > .unique-declarations-bar, 
+#margin-graph.graph-wrap .graph-body > div > .unique-declarations-bar {
+    position: absolute;
+    bottom: 0;
+    right: 15%;
+    width: 30%;
+    background: #999999;
+}
+
+#padding-graph.graph-wrap .graph-body > div, #margin-graph.graph-wrap .graph-body > div {
+    position: relative;
+    float: left;
+    width: 20%;
+    height: 100%;
+    text-align: center;
+}
+
+#raw-css pre {
+    /*font-family: 'Noto Sans Kr', sans-serif;*/
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: .9rem;
+    background: #f7f7f7;
+    min-height: 500px;
+    max-height: 500px;
+    overflow-x: auto;
+    overflow-y: auto;
+    padding: 16px;
+}
+
+.modal-wrapper {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    background: rgba(0, 0, 0, 0.7);
+
+    &.on {
+        display: block;
+    }
+
+    .modal {
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 60%;
+        height: 100%;
+        z-index: 10000;
+        background: #f7f7f7;
+        overflow-y: auto;
+        transition: all 1s;
+    
+        h2 {
+        padding: 10px;
+        font-size: 1.5rem;
+        border-bottom: 1px solid #ccc;
+        background: #fff;
+        text-transform: uppercase;
+        }
+    }
+    
+    .modal-close {
+        position: absolute;
+        top: 0;
+        right: 0;
+    
+        a {
+        display: block;
+        padding: 10px;
+        color: #000;
+        text-decoration: none;
+        }
+    }
+    
+    .modal-body {
+        /*font-family: 'Noto Sans Kr', sans-serif;*/
+        font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+        font-size: .9rem;
+        padding: 16px;
+    
+        ol {
+        margin-left: 30px;
+        }
+    }
+}

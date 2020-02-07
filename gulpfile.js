@@ -2,6 +2,7 @@ var gulp = require('gulp');
 var fs = require('fs');
 var path = require('path');
 var sass = require('gulp-sass');
+var postcss = require('gulp-postcss');
 var gulpSort = require('gulp-sort');
 var browserSync = require('browser-sync').create();
 var reload = browserSync.reload;
@@ -16,17 +17,19 @@ var fileinclude = require('gulp-file-include');
 var del = require('del');
 var runSequence = require('run-sequence');
 var sourcemaps = require('gulp-sourcemaps');
-//var spritesmith = require('gulp.spritesmith-multi');
 var spritesmith = require('gulp.spritesmith');
+var cleanCss = require('gulp-clean-css');
 var merge = require('merge-stream');
 var newer = require('gulp-newer');
-var autoprefixer = require('gulp-autoprefixer');
-const compileHandlebars = require('gulp-compile-handlebars');
-const rename = require('gulp-rename');
+var autoprefixer = require('autoprefixer');
+var compileHandlebars = require('gulp-compile-handlebars');
+var rename = require('gulp-rename');
+var cssstats = require('gulp-cssstats');
 var autoprefixerOptions = {
   browsers: ['last 2 versions', '> 5%', 'Firefox ESR']
 };
 
+// paths
 const paths = {
   src: 'src/',
   dist: 'dist/',
@@ -54,6 +57,18 @@ const config = {
   md5: true // md5 실행 여부 (default: true)
 };
 
+// autoprefixer 옵션
+const autoprefixerBrowsers = [
+  'ie >= 10',
+  'ie_mob >= 10',
+  'ff >= 30',
+  'chrome >= 34',
+  'safari >= 7',
+  'opera >= 23',
+  'ios >= 7',
+  'android >= 4.3'
+];
+
 // Development Tasks 
 // -----------------
 
@@ -66,7 +81,7 @@ gulp.task('sass', function () {
       indentWidth: 1
     },
     postcss: [autoprefixer({
-      browsers: autoprefixerOptions,
+      browsers: autoprefixerBrowsers,
       grid: true
     })]
   };
@@ -74,12 +89,34 @@ gulp.task('sass', function () {
   return gulp.src(path.join(paths.scss_src, '/**/*.scss'))
     .pipe(sourcemaps.init())
     .pipe(sass(options.sass).on('error', sass.logError))
+    .pipe(postcss(options.postcss))
     .pipe(sourcemaps.write('./maps'))
     .pipe(gulp.dest(paths.css_dist))
     .pipe(browserSync.reload({ // Reloading with Browser Sync
       stream: true
     }));
-})
+});
+
+// css stats
+gulp.task('cssstats', function() {
+  gulp.src(path.join(paths.css_dist, 'style.css'))
+    .pipe(cssstats())
+    .pipe(gulp.dest(paths.css_dist));
+});
+
+// css 압축
+gulp.task('minify', [], () => {
+  var cleanCssOption = {
+      level: {
+          2: {
+              mergeSemantically: true
+          }
+      }
+  };
+  return gulp.src(path.join(paths.css_dist, '*.css'))
+      .pipe(cleanCss(cleanCssOption))
+      .pipe(gulp.dest(paths.css_dist));
+});
 
 // browser-sync
 gulp.task('browser-sync', function () {
@@ -100,8 +137,7 @@ gulp.task('watch', function () {
   gulp.watch([path.join(paths.html_src, '/**/*'), path.join(paths.html_src, 'index.html')], ['fileinclude', reload]);
   gulp.watch(path.join(paths.sprite_png_src, '/**/*'), ['auto-sprite', 'images', reload]);
   gulp.watch(path.join(paths.img_src, '/**/*'), ['images', reload]);
-})
-
+});
 
 // get children folder
 function getFolders(dir) {
@@ -187,7 +223,7 @@ gulp.task('useref', function () {
 
 // Optimizing Images 
 gulp.task('images', function () {
-  return gulp.src(path.join(paths.img_src, '**/*.+(png|jpg|jpeg|gif|svg)'))
+  return gulp.src([path.join(paths.img_src, '**/*.+(png|jpg|jpeg|gif|svg)'), path.join(paths.img_src, 'sp_*.png')])
     .pipe(newer(paths.img_dist))
     // Caching images that ran through imagemin
     .pipe(cache(imagemin({
@@ -234,13 +270,13 @@ gulp.task('concat:js', function () {
 // Build Sequences
 // ---------------
 gulp.task('default', function (callback) {
-  runSequence('clean:dist', 'useref', 'fonts', 'concat:js', 'auto-sprite', 'images', 'sass', 'fileinclude', 'watch', 'browser-sync',
+  runSequence('clean:dist', 'useref', 'fonts', 'concat:js', 'auto-sprite', 'images', 'sass', 'minify', 'fileinclude', 'cssstats', 'watch', 'browser-sync',
     callback
   )
 });
 
 gulp.task('build', function (callback) {
-  runSequence('clean:dist', 'useref', 'fonts', 'concat:js', 'auto-sprite', 'images', 'sass', 'fileinclude',
+  runSequence('clean:dist', 'useref', 'fonts', 'concat:js', 'auto-sprite', 'images', 'sass', 'minify', 'fileinclude', 'cssstats',
     callback
   )
 });

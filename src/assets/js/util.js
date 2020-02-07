@@ -502,6 +502,12 @@ var ugData = (function (ugData, $, undefined) {
 
         postWithToken: function (url, param) {
             return ajaxObject(url, param, 'post', true, true);
+        },
+
+        // getHTML 방식
+        getHTML: function(url, param) {
+            //console.log("get");
+            return ajaxObject(url, param, 'get', false, true, 'text');
         }
     }
 })(window, jQuery);

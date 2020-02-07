@@ -1,5 +1,3 @@
-
-
 @import "./base/variables",
         "./bourbon",
         "./sprites/sprite_maps",
@@ -12,8 +10,9 @@
         "./base/reset",
         "./base/grid";
 
-@import "./services/theme";
-        
 @import "./components/button",
         "./components/form",
         "./components/ionic";
+
+@import "./services/_prism",
+        "./services/blog";

@@ -1,0 +1,824 @@
+body {
+	color: #b1b1b1;
+	line-height: 1.8;
+	font-size: 18px;
+	font-weight: 100;
+	font-family: "Noto Sans KR", -apple-system, BlinkMacSystemFont, sans-serif;
+	background-color: #222;
+	background: radial-gradient(circle at center, #111 10%, #323232 100%);
+	background-attachment: fixed;
+	min-height: 100vh;
+    min-width: 320px;
+    
+    @include respond-to(mobile) {
+        font-size: 16px;
+		background: radial-gradient(circle at center, #111 10%, #323232 100%);
+    }
+
+    .loading {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.7);
+    }
+    
+    .loading-img {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        width: 60px;
+        height: 60px;
+        margin: -30px 0 0 -30px;
+        padding: 2px;
+        background: #111;
+        border: 2px solid #000;
+        -webkit-border-radius: 50%;
+        -moz-border-radius: 50%;
+        border-radius: 50%;
+    }
+    
+    .loading-img img {
+        display: block;
+        width: 32px;
+        height: 32px;
+        margin: 10px auto 0;
+    }
+
+    #wrap {
+        max-width: 700px;
+        margin: 0 auto;
+        text-align: left;
+        letter-spacing: -0.02em;
+        font-size: 1em;
+    
+        @include respond-to(mobile) {
+            max-width: 100%;
+            width: 90%;
+        }
+
+        @include respond-to(mobile-tablet) {
+            #wrap {
+                max-width: 100%;
+                width: 90%;
+            }
+        }
+
+        h1, h2, h3 {
+            color: #eee;
+            font-weight: 600;
+            margin-top: 1.5em;
+            margin-bottom: .5em;
+            line-height: 1.4;
+
+            @include respond-to(mobile) {
+                margin-top: .3em;
+		        font-size: 3.2em;
+            }
+        }
+
+        h1 {
+            margin-top: 0.8em;
+            margin-bottom: .2em;
+            font-size: 4em;
+            line-height: 1.2;
+            letter-spacing: -0.05em;
+
+            @include respond-to(mobile) {
+                margin-top: .5em;
+            }
+        }
+
+        h2 {
+            font-size: 1.8em;
+        }
+
+        h2 + h3 {
+            margin-top: 1.5em;
+
+            @include respond-to(mobile) {
+                margin-top: .5em;
+            }
+        }
+
+        .postmeta {
+            margin-bottom: 0;
+
+            span {
+                font-size: 0.9em;
+            }
+        }
+
+        article {
+            & > p,
+            & > ul,
+            & > ol,
+            & > div:not(.code-toolbar) {
+                margin-bottom: 1.1em;
+            }
+        }
+
+        a {
+            letter-spacing: 0;
+
+            &:link,
+            &:visited {
+                color: #c0ff11;
+                text-decoration: none;
+                border-bottom: solid 1px #363636;
+            }
+
+            &:hover,
+            &:focus {
+                color: #eee;
+	            border-bottom: solid 1px #c0ff11;
+            }
+        }
+
+        ol li {
+            list-style-position: outside;
+            margin-left: 2em;
+            margin-bottom: .8em;
+        }
+
+        ul {
+            list-style-type: none;
+        }
+
+        // header
+        header {
+            ul {
+                padding-top: 3em;
+                overflow: hidden;
+
+                li {
+                    float: left;
+
+                    a:link,
+                    a:visited {
+                        display: block;
+                        font-size: 1.05em;
+                        width: 3em;
+                        color: #b1b1b1;
+                        padding: 0.8em 1em 1em 0;
+                        margin-right: 0.7em;
+                        border-bottom: none;
+                        border-top: 1px solid #9c9c9c;
+
+                        @include respond-to(mobile) {
+                            width: auto;
+		                    padding-right: 0.8em;
+                        }
+                    }
+
+                    &.current-menu-item,
+                    &.on {
+                        a {
+                            color: #c0ff11;
+                            border-top-color: #c0ff11;
+                            
+                            &:hover {
+                                color: #c0ff11;
+	                            border-top-color: #c0ff11;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        // footer
+        footer {
+            margin-top: 6em;
+            padding-top: 4em;
+            padding-bottom: 6em;
+            padding-bottom: calc(6em + env(safe-area-inset-bottom));
+            padding-bottom: calc(6em + constant(safe-area-inset-bottom));
+            border-top: solid 1px #363636;
+            font-size: 0.7em;
+            color: #747474;
+            letter-spacing: 0;
+        }
+
+        // pagination
+        .pagination {
+            @include clearfix();
+
+            margin-top: 3.5em;
+            text-align: center;
+            
+            a.next_posts {
+                float: right;
+            }
+
+            a.prev_posts {
+                float: left;
+            }
+        }
+
+        // post-categories
+        ul.post-categories li {
+            display: inline-block;
+            padding-left: 0.4em;
+
+            &::after {
+                content: ', ';
+                display: inline-block;
+            }
+
+            &:first-child {
+                padding-left: 0;
+            }
+
+            &:last-child:after {
+                display: none;
+            }
+        }
+
+        // embed prism
+        .cp_embed_wrapper {
+            padding-top: 0;
+            padding-bottom: 0;
+
+            &+script+p,
+            &+script+ul,
+            &+script+ol {
+                margin-top: 1em;
+            }
+        }
+
+        // table
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+            border-right: none;
+            border-left: none;
+            border-top: none;
+            width: 100%;
+
+            th,
+            td {
+                text-align: left;
+                white-space: nowrap;
+                padding: 0.2em 8px;
+                border-bottom: 1px solid #333;
+            }
+
+            th {
+                height: 50px;
+                background: #000;
+                vertical-align: middle;
+            }
+
+            td {
+                padding: .5em 8px;
+            }
+        }
+
+        // responsive_wrap
+        .responsive_wrap {
+            position: relative;
+            width: 100%;
+            
+            * {
+                box-sizing: border-box;
+            }
+
+            .responsive_container {
+                overflow-x: auto;
+                overflow-y: hidden;
+                min-height: .01%;
+
+                & > div {
+                    position: relative;
+                    float: left;
+                    width: 100%;
+
+                    table {
+                        min-width: 600px;
+                    }
+                }
+            }
+        }
+
+        // football
+        .team_logo {
+            display: inline-block;
+            margin-right: 8px;
+
+            img {
+                display: inline-block;
+                width: auto;
+                max-width: initial;
+                max-width: auto;
+                width: 20px;
+                height: 20px;
+                vertical-align: middle;
+            }
+        }
+
+        #standing-table {
+            margin-top: 1em;
+            margin-bottom: .5em;
+            overflow-y: hidden;
+            overflow-x: auto;
+            
+            @include respond-to(mobile) {
+                #standing-table {
+                    padding: 0 5%;
+                    margin-left: -5%;
+                    margin-right: -5%;
+                }
+            }
+
+            table {
+                th,
+                td {
+                    text-align: center;
+                }
+
+                td {
+                    letter-spacing: 0;
+                }
+
+                thead td:nth-child(2),
+                tbody td:nth-child(2) {
+                    text-align: left;
+                }
+
+                & + p.cite {
+                    margin-top: 1em;
+                }
+            }
+        }
+
+        #futball-data {
+            margin-top: 1.5em;
+
+            .team-logo {
+                vertical-align: middle;
+                display: inline-block;
+                width: 25px;
+                height: 25px;
+                margin-top: -1px;
+                margin-right: 5px;
+
+                img {
+                    display: block;
+                    width: 100%;
+                    max-width: 100%;
+                }
+            }
+
+            table{
+                tbody tr td {
+                    position: relative;
+                    &::after {
+                        content: '';
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        width: 3px;
+                        height: 100%;
+                    }
+                }
+            }
+
+            &.PL table tbody tr {
+                &:nth-child(1) td:nth-child(1):after, 
+                &:nth-child(2) td:nth-child(1):after, 
+                &:nth-child(3) td:nth-child(1):after, 
+                &:nth-child(4) td:nth-child(1):after {
+                    background: #c0ff11;
+                }
+            }
+
+            &.PD table tbody tr {
+                &:nth-child(1) td:nth-child(1):after, 
+                &:nth-child(2) td:nth-child(1):after, 
+                &:nth-child(3) td:nth-child(1):after, 
+                &:nth-child(4) td:nth-child(1):after {
+                    background: #c0ff11;
+                }
+            }
+
+            &.BL1 table tbody tr {
+                &:nth-child(1) td:nth-child(1):after, 
+                &:nth-child(2) td:nth-child(1):after, 
+                &:nth-child(3) td:nth-child(1):after, 
+                &:nth-child(4) td:nth-child(1):after {
+                    background: #c0ff11;
+                }
+            }
+
+            &.SA table tbody tr {
+                &:nth-child(1) td:nth-child(1):after, 
+                &:nth-child(2) td:nth-child(1):after, 
+                &:nth-child(3) td:nth-child(1):after, 
+                &:nth-child(4) td:nth-child(1):after {
+                    background: #c0ff11;
+                }
+            }
+
+            &.FL1 table tbody tr {
+                &:nth-child(1) td:nth-child(1):after, 
+                &:nth-child(2) td:nth-child(1):after, 
+                &:nth-child(3) td:nth-child(1):after {
+                    background: #c0ff11;
+                }
+            }
+
+            &.DED table tbody tr {
+                &:nth-child(1) td:nth-child(1):after, 
+                &:nth-child(2) td:nth-child(1):after {
+                    background: #c0ff11;
+                }
+            }
+
+            &.PL table tbody tr:nth-child(5) td:nth-child(1):after {
+                background: #ffbf20;
+            }
+
+            &.PD table tbody tr {
+                &:nth-child(5) td:nth-child(1):after,
+                &:nth-child(6) td:nth-child(1):after {
+                    background: #ffbf20;
+                }
+            }
+
+            &.BL1 table tbody tr {
+                &:nth-child(5) td:nth-child(1):after,
+                &:nth-child(6) td:nth-child(1):after {
+                    background: #ffbf20;
+                }
+            }
+
+            &.SA table tbody tr {
+                &:nth-child(5) td:nth-child(1):after,
+                &:nth-child(6) td:nth-child(1):after {
+                    background: #ffbf20;
+                }
+            }
+
+            &.FL1 table tbody tr:nth-child(4) td:nth-child(1):after {
+                background: #ffbf20;
+            }
+
+            &.DED table tbody tr {
+                &:nth-child(3) td:nth-child(1):after,
+                &:nth-child(4) td:nth-child(1):after,
+                &:nth-child(5) td:nth-child(1):after,
+                &:nth-child(6) td:nth-child(1):after,
+                &:nth-child(7) td:nth-child(1):after {
+                    background: #ffbf20;
+                }
+            }
+
+            &.PL table tbody tr {
+                &:nth-child(18) td:nth-child(1):after, 
+                &:nth-child(19) td:nth-child(1):after, 
+                &:nth-child(20) td:nth-child(1):after {
+                    background: #ff7171;
+                }
+            }
+
+            &.PD table tbody tr {
+                &:nth-child(18) td:nth-child(1):after, 
+                &:nth-child(19) td:nth-child(1):after, 
+                &:nth-child(20) td:nth-child(1):after {
+                    background: #ff7171;
+                }
+            }
+
+            &.BL1 table tbody tr {
+                &:nth-child(17) td:nth-child(1):after, 
+                &:nth-child(18) td:nth-child(1):after {
+                    background: #ff7171;
+                }
+            }
+
+            &.SA table tbody tr {
+                &:nth-child(18) td:nth-child(1):after, 
+                &:nth-child(19) td:nth-child(1):after, 
+                &:nth-child(20) td:nth-child(1):after {
+                    background: #ff7171;
+                }
+            }
+
+            &.FL1 table tbody tr {
+                &:nth-child(19) td:nth-child(1):after, 
+                &:nth-child(20) td:nth-child(1):after {
+                    background: #ff7171;
+                }
+            }
+
+            &.DED table tbody tr:nth-child(18) td:nth-child(1):after {
+                background: #ff7171;
+            }
+
+            &.BL1 table tbody tr:nth-child(16) td:nth-child(1):after, 
+            &.FL1 table tbody tr:nth-child(18) td:nth-child(1):after {
+                background: #35CA85;
+            }
+        
+            &.DED table tbody tr {
+                &:nth-child(16) td:nth-child(1):after, 
+                &:nth-child(17) td:nth-child(1):after {
+                    background: #35CA85;
+                }
+            }
+
+            .logo-league {
+                display: block;
+                width: 50px;
+            }
+
+            .league-name {
+                display: block;
+                text-align: center;
+            }
+
+            .select {
+                position: relative;
+                margin-top: 1em;
+
+                &::after {
+                    content: '';
+                    position: absolute;
+                    top: 50%;
+                    right: .5em;
+                    padding: 0;
+                    width: 20px;
+                    height: 20px;
+                    background: url("/assets/images/common/arrow-down-white.png") 0 0 no-repeat;
+                    background-size: 20px auto;
+                    cursor: pointer;
+                    pointer-events: none;
+                    -webkit-transition: .25s all ease;
+                    transition: .25s all ease;
+                    transform: translateY(-50%);
+                }
+            }
+
+            select#match-day-list {
+                width: 100%;
+                background: #333;
+                border:1px solid #444;
+                padding: .7em .9em;
+                font-weight: 600;
+                border-radius: 0;
+                box-shadow: none;
+                outline: 0;
+                -webkit-appearance: none;
+                -moz-appearance: none;
+                appearance: none;
+            }
+
+            .match-score-info{
+                @include clearfix();
+
+                .team-box {
+                    float:left;
+                    width: 50%;
+
+                    .team-logo,
+                    .team-name,
+                    .score {
+                        display: block;
+                        margin: 0 auto;
+                        text-align: center;
+                    }
+
+                    .team-logo {
+                        width: 50px;
+                        height: 50px;
+                    }
+
+                    .team-name {
+                        font-size: .65em;
+                        letter-spacing: 0;
+
+                        @include respond-to(mobile) {
+                            font-size: .7em;
+                            letter-spacing: 0;
+                        }
+                    }
+
+                    .score {
+                        font-size: 1.5em;
+                        font-weight: 700;
+                        font-family: 'Roboto', sans-serif;
+                        line-height: 1.2;
+                        color: #fff;
+                    }
+                }
+            }
+
+            .match-day-tit {
+                font-weight: 600;
+                margin-top: 1.2em;
+                border: 1px solid #444;
+                border-bottom: none;
+                padding: 1em;
+                background:#333;
+            }
+
+            .match-day-list {
+                border: 1px solid #444;
+                padding: 0;
+
+                ul {
+                    overflow: hidden;
+    
+                    li {
+                        float: left;
+                        width:50%;
+                        padding: .5em 0;
+                        border-top: 1px solid #444;
+                        box-sizing: border-box;
+
+                        @include respond-to(mobile) {
+                            width: 100%;
+                        }
+
+                        &:nth-child(2) {
+                            @include respond-to(mobile) {
+                                border-top: 1px solid #444;
+                            }
+                        }
+
+                        &:nth-child(2n) {
+                            @include respond-to(mobile) {
+                                border-left: none;
+                            }
+                        }
+    
+                        &:nth-child(1),
+                        &:nth-child(2) {
+                            border-top: none;
+                        }
+    
+                        &:nth-child(2n) {
+                            float: right;
+                        }
+    
+                        &:nth-child(2n+1) {
+                            clear: both;
+                        }
+    
+                        &:last-child {
+                            border-bottom: none;
+                            padding-bottom: 0;
+                        }
+                    }
+                }
+            }
+
+            .match-date {
+                clear: both;
+                display: block;
+                text-align: center;
+                font-size: 0.8em;
+                letter-spacing: 0;
+                padding-top: 0.5em;
+                padding-bottom: 1em;
+            }
+
+            .season_info {
+                text-align: left;
+                letter-spacing: 0;
+                font-weight: 600;
+                font-size: 1.1em;
+                margin-bottom: 0;
+            }
+        }
+
+        // link box
+        .link_box {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: 0;
+            background: rgba(0, 0, 0, .5);
+            min-width: 180px;
+
+            p a,
+            ul li a {
+                display: block;
+                font-size: 0.8em;
+                padding: 0.2em 0.8em;
+                color: #fff;
+                border-bottom: none;
+            }
+
+            p a {
+                font-size: 1em;
+                padding: 0.3em 0.6em;
+            }
+
+            ul {
+                display: none;
+            }
+
+            &.on ul {
+                display: block;
+            }
+        }
+
+        // league tab
+        .league_tab {
+            overflow: hidden;
+            padding-bottom: .5em;
+
+            li {
+                float: left;
+                width: 20%;
+
+                a {
+                    display: block;
+                    text-align: center;
+                    border-bottom: none;
+                }
+            }
+        }
+
+        // video wrapper
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%;
+
+            iframe,
+            video {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                z-index: 1;
+            }
+        }
+
+        #matches-table {
+            margin-top: 1rem;
+        }
+
+        #season-name {
+            font-weight: 600;
+            font-size: 1.2rem;
+            letter-spacing: -.1rem;
+        }
+
+        // tab-nav
+        .tab-nav {
+            clear: both;
+            margin-top: 1em;
+            border-top: 1px solid #363636;
+            border-left: 1px solid #363636;
+
+            ul {
+                width: 100%;
+                overflow: hidden;
+                
+                li {
+                    float: left;
+                    width: 16.66666%;
+                    vertical-align: middle;
+
+                    a {
+                        text-align: center;
+                        display: block;
+                        border-right: 1px solid #363636;
+                        border-bottom: 1px solid #363636;
+                        padding: .5em 0;
+
+                        &:hover {
+                            color: #fff;
+	                        background: #444;
+                        }
+                    }
+
+                    &.on a{
+                        pointer-events: none;
+                        cursor: not-allowed;
+                    }
+
+                    @include respond-to(mobile) {
+                        width: 33.33333%;
+                    }
+
+                    &:nth-child(4) {
+                        @include respond-to(mobile) {
+                            clear:both;
+                        }
+                        
+                    }
+                }
+            }
+        }
+
+        .league-subtab-nav ul li {
+            width: 50%;
+        }
+    }
+}

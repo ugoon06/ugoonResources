@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>CSS STATS</title>
+    <link rel="stylesheet" href="/assets/css/cssstats.css">
+    <script src="/assets/js/jquery.min.js"></script>
+    <script src="/assets/js/util.js"></script>
+    <script src="/assets/js/stats.js"></script>
+    <style></style>
+</head>
+<body>
+    
+    <div id="wrap">
+        <div id="container">
+            
+            <div class="stats-box">
+                <dl class="half">
+                    <dt>File size</dt>
+                    <dd><span id="size">0</span></dd>
+                </dl>
+                <dl class="half">
+                    <dt>Gzipped file size</dt>
+                    <dd><span id="gzipSize">0</span></dd>
+                </dl>
+            </div>
+
+            <div class="stats-box" id="overview">
+                <h2>Overview</h2>
+                
+                <dl class="one-fourth">
+                    <dt>RULES</dt>
+                    <dd><a href="#" class="modal" data-title="rules"><span id="rules-total">0</span></a></dd>
+                </dl>
+                
+                <dl class="one-fourth">
+                    <dt>SELECTORS</dt>
+                    <dd><a href="#" class="modal" data-title="selectors"><span id="selectors-total">0</span></a></dd>
+                </dl>
+                
+                <dl class="one-fourth">
+                    <dt>DECLARATIONS</dt>
+                    <dd><a href="#" class="modal" data-title="declarations"><span id="declarations-total">0</span></a></dd>
+                </dl>
+                
+                <dl class="one-fourth">
+                    <dt>PROPERTIES</dt>
+                    <dd><span id="properties-total">0</span></dd>
+                </dl>
+                
+                <dl class="one-fourth">
+                    <dt>ID</dt>
+                    <dd><span id="id-total">0</span></dd>
+                </dl>
+                
+                <dl class="one-fourth">
+                    <dt>CLASS</dt>
+                    <dd><span id="class-total">0</span></dd>
+                </dl>
+                
+                <dl class="one-fourth">
+                    <dt>PSEUDO CLASS</dt>
+                    <dd><span id="pseudo-class-total">0</span></dd>
+                </dl>
+                
+                <dl class="one-fourth">
+                    <dt>PSEUDO ELEMENT</dt>
+                    <dd><span id="pseudo-element-total">0</span></dd>
+                </dl>
+            </div>
+
+            <div class="stats-box">
+                <h2>Total Declaration Counts</h2>
+
+                <h3>LAYOUT AND STRUCTURE</h3>
+                <dl class="one-fifth">
+                    <dt>Display</dt>
+                    <dd><span id="display-cnt">0</span></dd>
+                </dl>
+                
+                <dl class="one-fifth">
+                    <dt>Float</dt>
+                    <dd><span id="float-cnt">0</span></dd>
+                </dl>
+                
+                <dl class="one-fifth">
+                    <dt>Width</dt>
+                    <dd><span id="width-cnt">0</span></dd>
+                </dl>
+                
+                <dl class="one-fifth">
+                    <dt>Height</dt>
+                    <dd><span id="height-cnt">0</span></dd>
+                </dl>
+                
+                <dl class="one-fifth">
+                    <dt>Max Width</dt>
+                    <dd><span id="max-width-cnt">0</span></dd>
+                </dl>
+                
+                <dl class="one-fifth">
+                    <dt>Min Width</dt>
+                    <dd><span id="min-width-cnt">0</span></dd>
+                </dl>
+                
+                <dl class="one-fifth">
+                    <dt>Max Height</dt>
+                    <dd><span id="max-height-cnt">0</span></dd>
+                </dl>
+                
+                <dl class="one-fifth">
+                    <dt>Min Height</dt>
+                    <dd><span id="min-height-cnt">0</span></dd>
+                </dl>
+            </div>
+
+            <div class="stats-box">
+                <h3>SPACING</h3>
+                <dl class="one-fifth">
+                    <dt>Padding</dt>
+                    <dd><span id="padding-cnt">0</span></dd>
+                </dl>
+                
+                <dl class="one-fifth">
+                    <dt>Padding Left</dt>
+                    <dd><span id="padding-left-cnt">0</span></dd>
+                </dl>
+                
+                <dl class="one-fifth">
+                    <dt>Padding Right</dt>
+                    <dd><span id="padding-right-cnt">0</span></dd>
+                </dl>
+                
+                <dl class="one-fifth">
+                    <dt>Padding Top</dt>
+                    <dd><span id="padding-top-cnt">0</span></dd>
+                </dl>
+                
+                <dl class="one-fifth">
+                    <dt>Padding Bottom</dt>
+                    <dd><span id="padding-bottom-cnt">0</span></dd>
+                </dl>
+                
+                <dl class="one-fifth">
+                    <dt>Margin</dt>
+                    <dd><span id="margin-cnt">0</span></dd>
+                </dl>
+                
+                <dl class="one-fifth">
+                    <dt>Margin Left</dt>
+                    <dd><span id="margin-left-cnt">0</span></dd>
+                </dl>
+                
+                <dl class="one-fifth">
+                    <dt>Margin Right</dt>
+                    <dd><span id="margin-right-cnt">0</span></dd>
+                </dl>
+                
+                <dl class="one-fifth">
+                    <dt>Margin Top</dt>
+                    <dd><span id="margin-top-cnt">0</span></dd>
+                </dl>
+                
+                <dl class="one-fifth">
+                    <dt>Margin Bottom</dt>
+                    <dd><span id="margin-bottom-cnt">0</span></dd>
+                </dl>
+            </div>
+
+            <div class="stats-box">
+                <h3>SKIN</h3>
+                <dl class="one-fifth">
+                    <dt>Color</dt>
+                    <dd><span id="color-cnt">0</span></dd>
+                </dl>
+                
+                <dl class="one-fifth">
+                    <dt>Background Color</dt>
+                    <dd><span id="background-color-cnt">0</span></dd>
+                </dl>
+                
+                <dl class="one-fifth">
+                    <dt>Border Color</dt>
+                    <dd><span id="border-color-cnt">0</span></dd>
+                </dl>
+                
+                <dl class="one-fifth">
+                    <dt>Box Shadow</dt>
+                    <dd><span id="box-shadow-cnt">0</span></dd>
+                </dl>
+            </div>
+
+            <div class="stats-box">
+                <h3>TYPOGRAPHY</h3>
+                <dl class="one-fifth">
+                    <dt>Font Family</dt>
+                    <dd><span id="font-family-cnt">0</span></dd>
+                </dl>
+                
+                <dl class="one-fifth">
+                    <dt>Font Size</dt>
+                    <dd><span id="font-size-cnt">0</span></dd>
+                </dl>
+                
+                <dl class="one-fifth">
+                    <dt>Font Weight</dt>
+                    <dd><span id="font-weight-cnt">0</span></dd>
+                </dl>
+                
+                <dl class="one-fifth">
+                    <dt>Text Align</dt>
+                    <dd><span id="text-align-cnt">0</span></dd>
+                </dl>
+                
+                <dl class="one-fifth">
+                    <dt>Line Height</dt>
+                    <dd><span id="line-height-cnt">0</span></dd>
+                </dl>
+                
+                <dl class="one-fifth">
+                    <dt>Letter Spacing</dt>
+                    <dd><span id="letter-spacing-cnt">0</span></dd>
+                </dl>
+                
+                <dl class="one-fifth">
+                    <dt>Text Decoration</dt>
+                    <dd><span id="text-decoration-cnt">0</span></dd>
+                </dl>
+                
+                <dl class="one-fifth">
+                    <dt>Text Transform</dt>
+                    <dd><span id="text-transform-cnt">0</span></dd>
+                </dl>
+                
+                <dl class="one-fifth">
+                    <dt>Text Shadow</dt>
+                    <dd><span id="text-shadow-cnt">0</span></dd>
+                </dl>
+            </div>
+
+            <div class="stats-box">
+                <h3>BORDERS</h3>
+                <dl class="one-fifth">
+                    <dt>Border</dt>
+                    <dd><span id="border-cnt">0</span></dd>
+                </dl>
+                
+                <dl class="one-fifth">
+                    <dt>Border Width</dt>
+                    <dd><span id="border-width-cnt">0</span></dd>
+                </dl>
+                
+                <dl class="one-fifth">
+                    <dt>Border Style</dt>
+                    <dd><span id="border-style-cnt">0</span></dd>
+                </dl>
+                
+                <dl class="one-fifth">
+                    <dt>Border Radius</dt>
+                    <dd><span id="border-radius-cnt">0</span></dd>
+                </dl>
+                
+                <dl class="one-fifth">
+                    <dt>Box Shadow</dt>
+                    <dd><span id="box-shadow-cnt">0</span></dd>
+                </dl>
+            </div>
+
+            <div class="stats-box">
+                <h2><span id="unique-color-cnt">0</span> UNIQUE COLORS</h2>
+                <div id="color-list-box"></div>
+            </div>
+
+            <div class="stats-box">
+                <h2><span id="unique-bgcolor-cnt">0</span> UNIQUE BACKGROUND COLORS</h2>
+                <div id="bgcolor-list-box"></div>
+            </div>
+
+            <div class="stats-box">
+                <h2><span id="total-bgcolor-cnt">0</span> TOTAL BACKGROUND COLORS</h2>
+                <div id="total-bgcolor-list"></div>
+            </div>
+
+            <div class="stats-box">
+                <h2>Typography - <span id="fontsize-unique-cnt">0</span> unique font sizes</h2>
+                <div id="fontsize-example-box">
+                </div>
+            </div>
+
+            <div class="stats-box">
+                <h2><span id="fontfamily-unique-cnt">0</span> unique font families</h2>
+                <div id="fontfamily-example-box"></div>
+            </div>
+
+            <div class="stats-box">
+                <h2>Spacing Resets</h2>
+
+                <dl class="one-fifth">
+                    <dt>Padding</dt>
+                    <dd><span id="padding-reset-cnt">0</span></dd>
+                </dl>
+                
+                <dl class="one-fifth">
+                    <dt>Padding Left</dt>
+                    <dd><span id="padding-left-reset-cnt">0</span></dd>
+                </dl>
+                
+                <dl class="one-fifth">
+                    <dt>Padding Right</dt>
+                    <dd><span id="padding-right-reset-cnt">0</span></dd>
+                </dl>
+                
+                <dl class="one-fifth">
+                    <dt>Padding Top</dt>
+                    <dd><span id="padding-top-reset-cnt">0</span></dd>
+                </dl>
+                
+                <dl class="one-fifth">
+                    <dt>Padding Bottom</dt>
+                    <dd><span id="padding-bottom-reset-cnt">0</span></dd>
+                </dl>
+                
+                <dl class="one-fifth">
+                    <dt>Margin</dt>
+                    <dd><span id="margin-reset-cnt">0</span></dd>
+                </dl>
+                
+                <dl class="one-fifth">
+                    <dt>Margin Left</dt>
+                    <dd><span id="margin-left-reset-cnt">0</span></dd>
+                </dl>
+                
+                <dl class="one-fifth">
+                    <dt>Margin Right</dt>
+                    <dd><span id="margin-right-reset-cnt">0</span></dd>
+                </dl>
+                
+                <dl class="one-fifth">
+                    <dt>Margin Top</dt>
+                    <dd><span id="margin-top-reset-cnt">0</span></dd>
+                </dl>
+                
+                <dl class="one-fifth">
+                    <dt>Margin Bottom</dt>
+                    <dd><span id="margin-bottom-reset-cnt">0</span></dd>
+                </dl>
+            </div>
+
+            <div class="stats-box">
+                <h2>z-index</h2>
+                <h3><span id="unique-zindex-cnt">0</span> unique z-index / <span id="total-zindex-cnt">0</span> total z-index</h3>
+                <div id="zindex-box"></div>
+            </div>
+
+            <div class="stats-box">
+                <h2>Specificity</h2>
+
+                <dl class="one-fifth">
+                    <dt>Average score</dt>
+                    <dd><span id="average-score">0</span></dd>
+                </dl>
+                
+                <dl class="one-fifth">
+                    <dt>Max score</dt>
+                    <dd><span id="max-score">0</span></dd>
+                </dl>
+            </div>
+
+            <div class="stats-box">
+                <h2>Ruleset Size</h2>
+                <div class="graph-wrap" id="ruleset-size-graph">
+                    <div class="graph-y"></div>
+                    <div class="graph-body"></div>
+                </div>
+            </div>
+
+            <div class="stats-box">
+                <h2>Total vs Unique Declarations</h2>
+                <p>Out of the <strong id="total-declarations-cnt">0</strong> total declarations, <strong id="unique-declarations-cnt">0</strong> have unique values.</p>
+                <h3>Layout and Structure</h3>
+                <div class="graph-wrap" id="layout-structure-graph">
+                    <div class="graph-y"></div>
+                    <div class="graph-body">
+                        <div id="display-bar-box">
+                            <span class="tit">Display</span>
+                            <span class="total-declarations-bar"></span>
+                            <span class="unique-declarations-bar"></span>
+                        </div>
+                        <div id="float-bar-box">
+                            <span class="tit">Float</span>
+                            <span class="total-declarations-bar"></span>
+                            <span class="unique-declarations-bar"></span>
+                        </div>
+                        <div id="width-bar-box">
+                            <span class="tit">Width</span>
+                            <span class="total-declarations-bar"></span>
+                            <span class="unique-declarations-bar"></span>
+                        </div>
+                        <div id="height-bar-box">
+                            <span class="tit">Height</span>
+                            <span class="total-declarations-bar"></span>
+                            <span class="unique-declarations-bar"></span>
+                        </div>
+                        <div id="max-width-bar-box">
+                            <span class="tit">Max Width</span>
+                            <span class="total-declarations-bar"></span>
+                            <span class="unique-declarations-bar"></span>
+                        </div>
+                        <div id="min-width-bar-box">
+                            <span class="tit">Min Width</span>
+                            <span class="total-declarations-bar"></span>
+                            <span class="unique-declarations-bar"></span>
+                        </div>
+                        <div id="max-height-bar-box">
+                            <span class="tit">Max Height</span>
+                            <span class="total-declarations-bar"></span>
+                            <span class="unique-declarations-bar"></span>
+                        </div>
+                        <div id="min-height-bar-box">
+                            <span class="tit">Min Height</span>
+                            <span class="total-declarations-bar"></span>
+                            <span class="unique-declarations-bar"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="stats-box">
+                <h3>Padding</h3>
+                <div class="graph-wrap" id="padding-graph">
+                    <div class="graph-y"></div>
+                    <div class="graph-body">
+                        <div id="padding-bar-box">
+                            <span class="tit">Padding</span>
+                            <span class="total-declarations-bar"></span>
+                            <span class="unique-declarations-bar"></span>
+                        </div>
+                        <div id="padding-left-bar-box">
+                            <span class="tit">Padding Left</span>
+                            <span class="total-declarations-bar"></span>
+                            <span class="unique-declarations-bar"></span>
+                        </div>
+                        <div id="padding-right-bar-box">
+                            <span class="tit">Padding Right</span>
+                            <span class="total-declarations-bar"></span>
+                            <span class="unique-declarations-bar"></span>
+                        </div>
+                        <div id="padding-top-bar-box">
+                            <span class="tit">Padding Top</span>
+                            <span class="total-declarations-bar"></span>
+                            <span class="unique-declarations-bar"></span>
+                        </div>
+                        <div id="padding-bottom-bar-box">
+                            <span class="tit">Padding Bottom</span>
+                            <span class="total-declarations-bar"></span>
+                            <span class="unique-declarations-bar"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="stats-box">
+                <h3>Margin</h3>
+                <div class="graph-wrap" id="margin-graph">
+                    <div class="graph-y"></div>
+                    <div class="graph-body">
+                        <div id="margin-bar-box">
+                            <span class="tit">Margin</span>
+                            <span class="total-declarations-bar"></span>
+                            <span class="unique-declarations-bar"></span>
+                        </div>
+                        <div id="margin-left-bar-box">
+                            <span class="tit">Margin Left</span>
+                            <span class="total-declarations-bar"></span>
+                            <span class="unique-declarations-bar"></span>
+                        </div>
+                        <div id="margin-right-bar-box">
+                            <span class="tit">Margin Right</span>
+                            <span class="total-declarations-bar"></span>
+                            <span class="unique-declarations-bar"></span>
+                        </div>
+                        <div id="margin-top-bar-box">
+                            <span class="tit">Margin Top</span>
+                            <span class="total-declarations-bar"></span>
+                            <span class="unique-declarations-bar"></span>
+                        </div>
+                        <div id="margin-bottom-bar-box">
+                            <span class="tit">Margin Bottom</span>
+                            <span class="total-declarations-bar"></span>
+                            <span class="unique-declarations-bar"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- <div class="stats-box">
+                <h2>Raw CSS</h2>
+                <div id="raw-css">
+                    <div></div>
+                </div>
+            </div> -->
+
+        </div>
+    </div>
+
+    
+    <div class="modal-wrapper">
+        <div class="modal">
+            <div class="modal-header"></div>
+            <div class="modal-body">
+                <ul>
+                    <li>.test.link</li>
+                </ul>
+            </div>
+            <div class="modal-close">
+                <a href="#">닫기</a>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
