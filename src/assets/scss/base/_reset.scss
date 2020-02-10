@@ -374,3 +374,7 @@ a, button, input, select, textarea {
         cursor: not-allowed;
     }
 }
+
+.blind {
+    @include hide-visually;
+}
